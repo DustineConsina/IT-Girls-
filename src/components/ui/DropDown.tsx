@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useRef, useEffect } from "react";
+import { FC, useState, ReactNode, useRef, useEffect } from "react";
 
 interface DropdownProps {
   buttonContent: ReactNode;
@@ -6,7 +6,7 @@ interface DropdownProps {
   className?: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ buttonContent, children, className = "" }) => {
+const Dropdown: FC<DropdownProps> = ({ buttonContent, children, className = "" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

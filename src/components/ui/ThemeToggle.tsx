@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Moon, Sun } from "lucide-react";
 
 interface ThemeToggleProps {
@@ -6,7 +6,7 @@ interface ThemeToggleProps {
   setTheme: (theme: string) => void;
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, setTheme }) => {
+const ThemeToggle: FC<ThemeToggleProps> = ({ theme, setTheme }) => {
   return (
     <button
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}

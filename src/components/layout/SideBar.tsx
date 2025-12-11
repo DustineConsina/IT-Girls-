@@ -1,13 +1,13 @@
-import type React from "react"
+import { FC, Dispatch, SetStateAction } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { HomeIcon, SettingsIcon } from "lucide-react"
 
 interface SidebarProps {
   isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+const Sidebar: FC<SidebarProps> = ({ isOpen }) => {
   const location = useLocation()
 
   const menuItems = [

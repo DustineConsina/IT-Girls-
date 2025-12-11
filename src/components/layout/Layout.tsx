@@ -1,10 +1,9 @@
-import type React from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, FC, ReactNode } from "react"
 import Sidebar from "./SideBar"
 import TopNav from "./TopNav"
 import Footer from "./Footer"
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 

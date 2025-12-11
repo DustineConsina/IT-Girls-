@@ -1,11 +1,11 @@
-import React from "react";
+import { FC, ButtonHTMLAttributes } from "react";
 
-interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "maroon" | "darkred" | "accent" | "highlight" | "soft" | "outline" | "ghost" | "link";
   size?: "sm" | "md" | "lg";
 }
 
-const Button: React.FC<CustomButtonProps> = ({
+const Button: FC<CustomButtonProps> = ({
   children,
   variant = "maroon",
   size = "md",

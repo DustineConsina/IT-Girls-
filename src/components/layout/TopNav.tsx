@@ -1,4 +1,4 @@
-import type React from "react"
+import { FC, Dispatch, SetStateAction } from "react"
 import { FaBell, FaUserCircle } from "react-icons/fa"
 import { LogOutIcon, MenuIcon } from "lucide-react"
 import { Link } from "react-router-dom"
@@ -9,10 +9,10 @@ interface TopNavProps {
   theme: string
   setTheme: (theme: string) => void
   isSidebarOpen: boolean
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const TopNav: React.FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarOpen }) => {
+const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <header className="p-4 flex justify-between items-center shadow-md">
       <div className="flex items-center gap-3">
