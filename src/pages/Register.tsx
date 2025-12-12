@@ -20,17 +20,23 @@ export default function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="min-h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: 'url(/logo-it.jpeg)',
+    }}>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black opacity-40"></div>
+      
+      {/* Form Container */}
       <form
         onSubmit={handleRegister}
-        className="bg-white p-6 rounded shadow w-80"
+        className="relative backdrop-blur-sm bg-white/30 p-8 rounded-lg shadow-2xl w-96 z-10 border border-white/20"
       >
-        <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center text-white drop-shadow-lg">Register</h2>
 
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-4 border border-white/30 bg-white/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 placeholder-gray-600"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -39,7 +45,7 @@ export default function Register() {
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-4 border border-white/30 bg-white/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 placeholder-gray-600"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -48,19 +54,19 @@ export default function Register() {
         <input
           type="password"
           placeholder="Confirm Password"
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-3 mb-6 border border-white/30 bg-white/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 placeholder-gray-600"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
 
-        <button className="w-full bg-blue-600 text-white py-2 rounded">
+        <button className="w-full bg-gradient-to-r from-pink-600 to-red-600 text-white py-3 rounded-lg font-semibold hover:from-pink-700 hover:to-red-700 transition shadow-lg">
           Register
         </button>
 
-        <p className="mt-3 text-center">
+        <p className="mt-4 text-center text-white drop-shadow-lg">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600">Login</Link>
+          <Link to="/login" className="text-blue-100 font-semibold hover:text-white underline">Login</Link>
         </p>
       </form>
     </div>
