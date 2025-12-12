@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import { AuthProvider } from "./context/AutContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import "admin-lte/dist/css/adminlte.min.css"; 
-import "./index.css"; 
+import "./index.css";
 
-const App: React.FC = () => {
+// Protected Route Component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated } = useAuth();
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
+const AppContent = () => {
   const [theme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -18,15 +29,30 @@ const App: React.FC = () => {
   }, [theme]);
 
   return (
+    <div className={`min-h-screen bg-gray-100 text-black dark:bg-black dark:text-white transition-colors`}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Home />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
     <AuthProvider>
       <BrowserRouter>
-        <div className={`min-h-screen bg-gray-100 text-black dark:bg-black dark:text-white transition-colors`}>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </Layout>
-        </div>
+        <AppContent />
       </BrowserRouter>
     </AuthProvider>
   );

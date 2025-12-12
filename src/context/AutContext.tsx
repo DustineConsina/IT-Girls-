@@ -2,7 +2,7 @@ import { createContext, useContext, useState, ReactNode, FC } from 'react';
 
 interface AuthContextType {
     isAuthenticated: boolean;
-    login: () => void;
+    login: (credentials: { email: string; password: string }) => void;
     logout: () => void;
 }
 
@@ -11,7 +11,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const login = () => setIsAuthenticated(true);
+    const login = (_credentials: { email: string; password: string }) => {
+        setIsAuthenticated(true);
+    };
     const logout = () => setIsAuthenticated(false);
 
     return (
