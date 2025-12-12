@@ -2,10 +2,12 @@ import { useEffect, useState, FC, ReactNode } from "react"
 import Sidebar from "./SideBar"
 import TopNav from "./TopNav"
 import Footer from "./Footer"
+import { useAuth } from "../../context/AuthContext"
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const { role } = useAuth()
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
+  const isAdmin = role === "admin"
 
   useEffect(() => {
     if (theme === "dark") {
@@ -19,15 +21,19 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <div
-      className={`flex h-screen overflow-hidden transition-colors ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}
+      className={`flex flex-col h-screen overflow-hidden transition-colors ${theme === "dark" ? "bg-gray-900 text-black" : "bg-white text-black"}`}
     >
-      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <div
-        className={`flex flex-col flex-1 transition-all duration-300 ease-in-out ${isSidebarOpen ? "ml-64" : ""}`}
-      >
-        <TopNav theme={theme} setTheme={setTheme} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
-        <Footer />
+      {/* TopNav for all users */}
+      <TopNav theme={theme} setTheme={setTheme} />
+      
+      <div className="flex flex-1 overflow-hidden relative">
+        {/* Show sidebar only for users, not admin */}
+        {!isAdmin && <Sidebar />}
+        
+        <div className="flex flex-col flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto">{children}</main>
+          <Footer />
+        </div>
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [userRole, setUserRole] = useState<"user" | "admin">("user");
   const navigate = useNavigate();
 
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,13 +16,13 @@ export default function Register() {
       alert("Passwords do not match!");
       return;
     }
-    login("user");
+    login(userRole);
     navigate("/");
   };
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: 'url(/logo-it.jpeg)',
+      backgroundImage: 'url(/logo-to.jpeg)',
     }}>
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-40"></div>
@@ -54,11 +55,42 @@ export default function Register() {
         <input
           type="password"
           placeholder="Confirm Password"
-          className="w-full p-3 mb-6 border border-white/30 bg-white/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 placeholder-gray-600"
+          className="w-full p-3 mb-4 border border-white/30 bg-white/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 placeholder-gray-600"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
+
+        {/* Role Selection */}
+        <div className="mb-6">
+          <label className="block text-gray-700 font-semibold mb-2 drop-shadow-lg">
+            Register as:
+          </label>
+          <div className="flex gap-4">
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="user"
+                checked={userRole === "user"}
+                onChange={(e) => setUserRole(e.target.value as "user" | "admin")}
+                className="mr-2"
+              />
+              <span className="text-gray-700">Customer</span>
+            </label>
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="admin"
+                checked={userRole === "admin"}
+                onChange={(e) => setUserRole(e.target.value as "user" | "admin")}
+                className="mr-2"
+              />
+              <span className="text-gray-700">Admin</span>
+            </label>
+          </div>
+        </div>
 
         <button className="w-full bg-gradient-to-r from-pink-600 to-red-600 text-white py-3 rounded-lg font-semibold hover:from-pink-700 hover:to-red-700 transition shadow-lg">
           Register

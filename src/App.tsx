@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Shop from "./pages/Shop";
 import "admin-lte/dist/css/adminlte.min.css"; 
 import "./index.css";
 
@@ -29,22 +30,30 @@ const AppContent = () => {
   }, [theme]);
 
   return (
-    <div className={`min-h-screen bg-gray-100 text-black dark:bg-black dark:text-white transition-colors`}>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Layout>
-                <Home />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <Home />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/shop"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <Shop />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 };
 
