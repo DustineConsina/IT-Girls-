@@ -113,18 +113,17 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen, isCollapsed, setIsCollap
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 transform bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border-r border-white/5 shadow-2xl transition-all duration-300 ease-in-out lg:static lg:translate-x-0 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } ${isCollapsed ? "w-72 lg:w-24" : "w-72"}`}
+        className={`fixed inset-y-0 right-0 z-50 transform border-l border-white/5 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 shadow-2xl transition-all duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } ${isCollapsed ? "w-72 sm:w-64" : "w-80"}`}
       >
         <div className="flex h-full flex-col px-5 py-6">
           <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-between"} gap-3`}
@@ -153,10 +152,10 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen, isCollapsed, setIsCollap
               </button>
               <button
                 onClick={() => setIsCollapsed(!isCollapsed)}
-                className="hidden rounded-xl p-2 text-slate-300 transition hover:text-white lg:flex"
+                className="hidden rounded-xl p-2 text-slate-300 transition hover:text-white sm:flex"
                 aria-label={isCollapsed ? "Expand navigation" : "Collapse navigation"}
               >
-                {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+                {isCollapsed ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
               </button>
             </div>
           </div>

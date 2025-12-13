@@ -12,13 +12,18 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import AdminDashboard from "./AdminDashboard";
+import UserDashboard from "./UserDashboard";
 
 const Home: FC = () => {
-  const { role } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
   // Show admin dashboard for admins
   if (role === "admin") {
     return <AdminDashboard />;
+  }
+
+  if (isAuthenticated && role === "user") {
+    return <UserDashboard />;
   }
 
   // Show website about page for regular users

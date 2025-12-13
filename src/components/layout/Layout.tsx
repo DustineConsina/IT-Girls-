@@ -31,14 +31,14 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
       />
 
       <div className="flex flex-1">
+        <main className="flex-1 overflow-x-hidden">{children}</main>
+
         <Sidebar
           isOpen={isSidebarOpen}
           setIsOpen={setIsSidebarOpen}
           isCollapsed={isSidebarCollapsed}
           setIsCollapsed={setIsSidebarCollapsed}
         />
-
-        <main className="flex-1 overflow-x-hidden">{children}</main>
       </div>
 
       <Footer />

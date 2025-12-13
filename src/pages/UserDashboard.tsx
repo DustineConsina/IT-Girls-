@@ -199,6 +199,24 @@ const UserDashboard: FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const statHighlights = [
+    {
+      label: "Products tracked",
+      value: productsCatalog.length.toLocaleString(),
+      helper: "Updated weekly",
+    },
+    {
+      label: "Items in cart",
+      value: cart.length.toString(),
+      helper: "Saved for checkout",
+    },
+    {
+      label: "Favorites",
+      value: favorites.length.toString(),
+      helper: "Curated by you",
+    },
+  ];
+
   const categories: Category[] = useMemo(() => {
     const counts = productsCatalog.reduce<Record<string, number>>((accumulator, product) => {
       return {
@@ -264,13 +282,13 @@ const UserDashboard: FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-purple-900 text-white">
-      <div className="max-w-6xl mx-auto space-y-16 px-4 py-16">
-        <section className="grid gap-8 lg:grid-cols-3">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl lg:col-span-2">
+      <div className="mx-auto max-w-7xl space-y-24 px-6 py-20">
+        <section className="grid gap-10 lg:grid-cols-[1.6fr_minmax(320px,1fr)] lg:items-stretch">
+          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-12 backdrop-blur-xl">
             <div className="absolute -top-32 right-0 h-64 w-64 rounded-full bg-purple-500/30 blur-3xl" />
             <div className="absolute -bottom-24 left-16 h-40 w-40 rounded-full bg-indigo-400/20 blur-2xl" />
-            <div className="relative z-10 space-y-8">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-purple-100">
+            <div className="relative z-10 space-y-10">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.35em] text-purple-100">
                 <Sparkles size={14} /> Tailored for you
               </span>
               <div className="space-y-3">
@@ -278,11 +296,11 @@ const UserDashboard: FC = () => {
                   Design your shopping experience
                 </h1>
                 <p className="max-w-xl text-sm text-purple-100 sm:text-base">
-                  Explore curated collections, discover community favorites, and track the products that matter most to you.
+                  Explore curated collections, discover community favorites, and track the products that matter most to you—all from a dashboard engineered for calm productivity.
                 </p>
               </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <div className="flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-purple-100 focus-within:border-white/30 focus-within:bg-white/10">
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <div className="flex flex-1 items-center gap-3 rounded-3xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-purple-100 focus-within:border-white/30 focus-within:bg-white/10">
                   <Search size={18} className="text-purple-200" />
                   <input
                     type="text"
@@ -292,44 +310,27 @@ const UserDashboard: FC = () => {
                     className="w-full bg-transparent text-sm text-white placeholder-purple-200/70 focus:outline-none"
                   />
                 </div>
-                <button className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:from-indigo-600 hover:to-purple-600">
-                  Explore Collection
+                <button className="inline-flex items-center justify-center gap-2 rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 px-8 py-4 text-sm font-semibold text-white shadow-lg transition hover:from-indigo-600 hover:to-purple-600">
+                  Explore collection
                   <ArrowUpRight size={18} />
                 </button>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-wide text-purple-200">Products</p>
-                  <p className="text-2xl font-semibold">{productsCatalog.length}</p>
-                  <p className="text-xs text-purple-200/80">Updated weekly</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-wide text-purple-200">Items in cart</p>
-                  <p className="text-2xl font-semibold">{cart.length}</p>
-                  <p className="text-xs text-purple-200/80">Saved for checkout</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-wide text-purple-200">Favorites</p>
-                  <p className="text-2xl font-semibold">{favorites.length}</p>
-                  <p className="text-xs text-purple-200/80">Curated by you</p>
-                </div>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 p-8 shadow-2xl">
-            <div className="space-y-4">
+          <div className="flex flex-col justify-between rounded-[32px] bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 p-12 shadow-2xl">
+            <div className="space-y-5">
               <h3 className="text-2xl font-semibold">Trending this week</h3>
               <p className="text-sm text-indigo-100">
                 Hand-picked items our community cannot stop talking about.
               </p>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-5 overflow-hidden">
               {trendingProducts.map((product) => (
                 <button
                   key={product.id}
                   onClick={() => openProductDetails(product)}
-                  className="w-full rounded-2xl border border-white/20 bg-white/10 p-4 text-left transition hover:border-white/40 hover:bg-white/15"
+                  className="w-full rounded-3xl border border-white/20 bg-white/10 px-5 py-4 text-left transition hover:border-white/40 hover:bg-white/15"
                 >
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
@@ -341,7 +342,7 @@ const UserDashboard: FC = () => {
                 </button>
               ))}
             </div>
-            <button className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20">
+            <button className="mt-10 inline-flex items-center justify-center gap-2 rounded-3xl border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/20">
               View full collection
               <ArrowUpRight size={16} />
             </button>
@@ -349,10 +350,23 @@ const UserDashboard: FC = () => {
         </section>
 
         <section className="grid gap-6 md:grid-cols-3">
+          {statHighlights.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-white/30 hover:bg-white/10"
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-purple-200">{stat.label}</p>
+              <p className="mt-4 text-3xl font-semibold text-white">{stat.value}</p>
+              <p className="mt-2 text-sm text-purple-200/80">{stat.helper}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="grid gap-8 md:grid-cols-3">
           {curatedCollections.map((collection) => (
             <div
               key={collection.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition hover:border-white/30 hover:bg-white/10"
+              className="rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-white/30 hover:bg-white/10"
             >
               <span className="mb-3 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-purple-100">
                 {collection.tag}
@@ -363,7 +377,7 @@ const UserDashboard: FC = () => {
           ))}
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h2 className="text-3xl font-semibold">Browse by category</h2>
@@ -373,12 +387,12 @@ const UserDashboard: FC = () => {
               Updated weekly
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`rounded-2xl border px-6 py-5 text-left transition ${
+                className={`rounded-[24px] border px-7 py-6 text-left transition ${
                   selectedCategory === category.id
                     ? "border-white/40 bg-white/15 text-white shadow-xl"
                     : "border-white/10 bg-white/5 text-purple-100 hover:border-white/25 hover:bg-white/10"
@@ -391,7 +405,7 @@ const UserDashboard: FC = () => {
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h2 className="text-3xl font-semibold">Featured products</h2>
@@ -407,12 +421,12 @@ const UserDashboard: FC = () => {
               No products match your current filters. Try a different category or search term.
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
                   onClick={() => openProductDetails(product)}
-                  className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30 hover:bg-white/10"
+                  className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30 hover:bg-white/10"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
@@ -449,7 +463,7 @@ const UserDashboard: FC = () => {
                       />
                     </button>
                   </div>
-                  <div className="flex flex-1 flex-col gap-4 p-5">
+                  <div className="flex flex-1 flex-col gap-5 p-6">
                     <div className="space-y-2">
                       <h3 className="line-clamp-2 text-lg font-semibold text-white">{product.name}</h3>
                       <div className="flex items-center gap-2">
@@ -493,7 +507,7 @@ const UserDashboard: FC = () => {
         </section>
 
         <section>
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 p-10 shadow-2xl">
+          <div className="overflow-hidden rounded-[32px] bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 p-12 shadow-2xl">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="space-y-2">
                 <h3 className="text-3xl font-semibold">Ready for your next upgrade?</h3>

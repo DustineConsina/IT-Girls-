@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
+import LoadingOverlay from "./components/ui/LoadingOverlay";
 import "admin-lte/dist/css/adminlte.min.css"; 
 import "./index.css";
 
@@ -20,6 +21,18 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 const AppContent = () => {
   const [theme] = useState(localStorage.getItem("theme") || "light");
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timeoutId = window.setTimeout(() => setIsLoading(false), 700);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [location]);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -30,30 +43,35 @@ const AppContent = () => {
   }, [theme]);
 
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Layout>
+    <>
+      <LoadingOverlay isLoading={isLoading} />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Layout>
+                <Home />
+              </Layout>
+            ) : (
               <Home />
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/shop"
-        element={
-          <ProtectedRoute>
-            <Layout>
-              <Shop />
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+            )
+          }
+        />
+        <Route
+          path="/shop"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Shop />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 };
 
