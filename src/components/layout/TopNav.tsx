@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { FaBell, FaUserCircle } from "react-icons/fa"
-import { LogOutIcon } from "lucide-react"
+import { LogOutIcon, MenuIcon } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import Dropdown from "../ui/DropDown"
@@ -9,9 +9,11 @@ import ThemeToggle from "../ui/ThemeToggle"
 interface TopNavProps {
   theme: string
   setTheme: (theme: string) => void
+  isSidebarOpen: boolean
+  setIsSidebarOpen: (isOpen: boolean) => void
 }
 
-const TopNav: FC<TopNavProps> = ({ theme, setTheme }) => {
+const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarOpen }) => {
   const { role, logout } = useAuth()
   const navigate = useNavigate()
   const isAdmin = role === "admin"
@@ -24,6 +26,13 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme }) => {
   return (
     <header className="p-4 flex justify-between items-center shadow-md bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 border-b border-slate-600">
       <div className="flex items-center gap-3">
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition hover:bg-white/10 lg:hidden"
+          aria-label="Toggle navigation"
+        >
+          <MenuIcon size={20} />
+        </button>
         <h1 className="text-xl font-bold text-white">
           Welcome, {isAdmin ? "Admin" : "User"}
         </h1>
