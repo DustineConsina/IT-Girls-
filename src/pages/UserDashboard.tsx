@@ -1,6 +1,7 @@
 import { FC, useMemo, useState } from "react";
 import { ArrowUpRight, Heart, Search, Sparkles, Star, TrendingUp } from "lucide-react";
 import ProductDetailsModal from "../components/ProductDetailsModal";
+import { useCart } from "../context/CartContext";
 
 type Category = {
   id: string;
@@ -194,10 +195,9 @@ const curatedCollections = [
 const UserDashboard: FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [cart, setCart] = useState<Product[]>([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { cartIds, favorites, addToCart: addCartItem, toggleFavorite: toggleFavoriteId } = useCart();
 
   const statHighlights = [
     {
@@ -207,7 +207,7 @@ const UserDashboard: FC = () => {
     },
     {
       label: "Items in cart",
-      value: cart.length.toString(),
+      value: cartIds.length.toString(),
       helper: "Saved for checkout",
     },
     {
@@ -264,15 +264,11 @@ const UserDashboard: FC = () => {
   }, [searchTerm, selectedCategory]);
 
   const toggleFavorite = (productId: number) => {
-    setFavorites((previous) =>
-      previous.includes(productId)
-        ? previous.filter((id) => id !== productId)
-        : [...previous, productId]
-    );
+    toggleFavoriteId(productId);
   };
 
   const addToCart = (product: Product) => {
-    setCart((previous) => [...previous, product]);
+    addCartItem(product.id);
   };
 
   const openProductDetails = (product: Product) => {

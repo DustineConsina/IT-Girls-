@@ -1,6 +1,7 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, Heart, Search, Sparkles, Star, TrendingUp } from "lucide-react";
 import ProductDetailsModal from "../components/ProductDetailsModal";
+import { useCart } from "../context/CartContext";
 
 interface Product {
   id: number;
@@ -43,6 +44,9 @@ const storeHighlights = [
     description: "Express delivery network covering major hubs worldwide.",
   },
 ];
+
+const CATEGORY_STORAGE_KEY = "shop_selected_category";
+const SEARCH_STORAGE_KEY = "shop_search_term";
 
 const seedProducts: Product[] = [
   {
@@ -187,10 +191,9 @@ const seedProducts: Product[] = [
 const Shop: FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [cart, setCart] = useState<Product[]>([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { cartIds, favorites, addToCart: addCartItem, toggleFavorite: toggleFavoriteId } = useCart();
 
   const products = useMemo<Product[]>(() => {
     const variantLabels = [
@@ -231,6 +234,47 @@ const Shop: FC = () => {
 
     return expanded.slice(0, 120);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      const storedSearchTerm = localStorage.getItem(SEARCH_STORAGE_KEY);
+      if (storedSearchTerm) {
+        setSearchTerm(storedSearchTerm);
+      }
+
+      const storedSelectedCategory = localStorage.getItem(CATEGORY_STORAGE_KEY);
+      if (storedSelectedCategory) {
+        setSelectedCategory((previous) =>
+          storedSelectedCategory === "all" || categoryOrder.includes(storedSelectedCategory)
+            ? storedSelectedCategory
+            : previous
+        );
+      }
+
+    } catch (error) {
+      console.error("Failed to restore shop state from storage", error);
+    }
+  }, [products]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    localStorage.setItem(SEARCH_STORAGE_KEY, searchTerm);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    localStorage.setItem(CATEGORY_STORAGE_KEY, selectedCategory);
+  }, [selectedCategory]);
 
   const categories = useMemo(() => {
     const counts = products.reduce<Record<string, number>>((accumulator, product) => {
@@ -281,16 +325,8 @@ const Shop: FC = () => {
     });
   }, [products, searchTerm, selectedCategory]);
 
-  const toggleFavorite = (productId: number) => {
-    setFavorites((previous) =>
-      previous.includes(productId)
-        ? previous.filter((id) => id !== productId)
-        : [...previous, productId]
-    );
-  };
-
   const addToCart = (product: Product) => {
-    setCart((previous) => [...previous, product]);
+    addCartItem(product.id);
   };
 
   const openProductDetails = (product: Product) => {
@@ -341,7 +377,7 @@ const Shop: FC = () => {
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                   <p className="text-xs uppercase tracking-wide text-purple-200">In your cart</p>
-                  <p className="text-2xl font-semibold">{cart.length}</p>
+                  <p className="text-2xl font-semibold">{cartIds.length}</p>
                   <p className="text-xs text-purple-200/80">Saved for checkout</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -474,7 +510,7 @@ const Shop: FC = () => {
                     <button
                       onClick={(event) => {
                         event.stopPropagation();
-                        toggleFavorite(product.id);
+                        toggleFavoriteId(product.id);
                       }}
                       className="absolute right-3 top-3 rounded-full bg-white/20 p-2 text-white backdrop-blur transition hover:bg-white/40"
                     >
@@ -552,7 +588,7 @@ const Shop: FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddToCart={addToCart}
-        onAddToFavorites={(product) => toggleFavorite(product.id)}
+        onAddToFavorites={(product) => toggleFavoriteId(product.id)}
         isFavorited={selectedProduct ? favorites.includes(selectedProduct.id) : false}
       />
     </div>
