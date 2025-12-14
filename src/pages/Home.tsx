@@ -91,7 +91,7 @@ const Home: FC = () => {
           <div className="absolute -bottom-32 left-16 h-48 w-48 rounded-full bg-indigo-400/25 blur-3xl" />
           <div className="relative z-10 space-y-10">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-purple-100">
-              <Sparkles size={14} /> Welcome to the marketplace
+              <Sparkles size={14} /> Welcome to the Syntax Sisters Marketplace
             </div>
             <div className="space-y-4">
               <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -234,7 +234,7 @@ const Home: FC = () => {
                 to="/shop"
                 className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-indigo-600 transition hover:bg-indigo-50"
               >
-                Browse the marketplace
+                Browse the Shop
                 <ShoppingBag size={18} />
               </Link>
             </div>

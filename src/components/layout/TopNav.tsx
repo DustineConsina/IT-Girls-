@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Bell, LogOut, Menu, Search, ShoppingBag, ShoppingCart, User } from "lucide-react"
+import { Bell, LogOut, Menu, ShoppingBag, ShoppingCart, User } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import Dropdown from "../ui/DropDown"
@@ -39,15 +39,7 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
           </div>
         </Link>
 
-        <div className="hidden flex-1 items-center gap-8 lg:flex">
-          <div className="relative flex-1">
-            <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-white/40" />
-            <input
-              type="search"
-              placeholder="Search catalog, brands, or SKU codes"
-              className="w-full rounded-3xl border border-white/10 bg-white/5 py-3.5 pl-14 pr-5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none"
-            />
-          </div>
+        <div className="hidden flex-1 items-center justify-end gap-8 lg:flex">
           <nav className="flex items-center gap-8 text-sm font-medium text-white/70">
             <Link to="/" className="transition hover:text-white">
               Home
