@@ -356,7 +356,7 @@ const UserDashboard: FC = () => {
                         activeProductId === product.id ? "cart-cta-animate" : ""
                       }`}
                     >
-                      Add to Bag
+                      Add to Cart
                     </button>
                   </div>
                 </div>

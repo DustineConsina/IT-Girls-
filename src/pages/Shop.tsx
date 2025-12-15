@@ -383,7 +383,7 @@ const Shop: FC = () => {
                         activeProductId === product.id ? "cart-cta-animate" : ""
                       }`}
                     >
-                      Add to bag
+                      Add to cart
                     </button>
                   </div>
                 </div>

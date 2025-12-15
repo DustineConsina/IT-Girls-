@@ -119,7 +119,7 @@ const Wishlist: FC = () => {
                     }`}
                   >
                     <ShoppingCart size={16} />
-                    Add to bag
+                    Add to cart
                   </button>
                 </div>
               </div>
