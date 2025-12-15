@@ -72,12 +72,12 @@ const ProductDetailsModal: FC<ProductDetailsModalProps> = ({
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-2">
               <span className="text-4xl font-bold text-gray-900">
-                ${product.price}
+                ₱{product.price.toLocaleString()}
               </span>
               {product.originalPrice && (
                 <>
                   <span className="text-lg text-gray-500 line-through">
-                    ${product.originalPrice}
+                    ₱{product.originalPrice.toLocaleString()}
                   </span>
                   <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
                     Save {discount}%

@@ -14,21 +14,21 @@ const AdminDashboard: FC = () => {
     {
       id: "ORD-001",
       customer: "John Doe",
-      amount: 299.99,
+      amount: 16799,
       status: "completed",
       date: "2024-12-10",
     },
     {
       id: "ORD-002",
       customer: "Jane Smith",
-      amount: 149.99,
+      amount: 8399,
       status: "pending",
       date: "2024-12-11",
     },
     {
       id: "ORD-003",
       customer: "Mike Johnson",
-      amount: 599.99,
+      amount: 33599,
       status: "completed",
       date: "2024-12-09",
     },
@@ -85,7 +85,7 @@ const AdminDashboard: FC = () => {
               <span className="text-green-100 text-sm font-bold bg-green-500 bg-opacity-30 px-3 py-1 rounded-full">+15%</span>
             </div>
             <p className="text-purple-100 text-sm font-semibold mb-1">Total Revenue</p>
-            <p className="text-4xl font-bold text-white mb-2">$98,765</p>
+            <p className="text-4xl font-bold text-white mb-2">₱5,535,000</p>
             <p className="text-purple-100 text-xs">Best month yet! 🎉</p>
           </div>
         </div>
@@ -134,7 +134,7 @@ const AdminDashboard: FC = () => {
                   <tr key={order.id} className="border-b border-white border-opacity-5 hover:bg-white hover:bg-opacity-5 transition group">
                     <td className="py-4 px-4 text-sm font-semibold text-white">{order.id}</td>
                     <td className="py-4 px-4 text-sm text-purple-100">{order.customer}</td>
-                    <td className="py-4 px-4 text-sm font-bold text-green-300">${order.amount}</td>
+                    <td className="py-4 px-4 text-sm font-bold text-green-300">₱{order.amount.toLocaleString()}</td>
                     <td className="py-4 px-4 text-sm">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1 ${

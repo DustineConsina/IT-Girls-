@@ -143,8 +143,8 @@ const Cart: FC = () => {
                         </button>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm text-purple-100/70">${product.price.toLocaleString()} each</p>
-                        <p className="text-lg font-semibold text-white">${lineTotal.toLocaleString()}</p>
+                        <p className="text-sm text-purple-100/70">₱{product.price.toLocaleString()} each</p>
+                        <p className="text-lg font-semibold text-white">₱{lineTotal.toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
@@ -160,20 +160,20 @@ const Cart: FC = () => {
               <div className="space-y-3 text-sm text-purple-100">
                 <div className="flex items-center justify-between">
                   <span>Subtotal</span>
-                  <span>${subtotal.toLocaleString()}</span>
+                  <span>₱{subtotal.toLocaleString()}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Shipping</span>
-                  <span>{shipping ? `$${shipping.toLocaleString()}` : "Included"}</span>
+                  <span>{shipping ? `₱${shipping.toLocaleString()}` : "Included"}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Tax (12%)</span>
-                  <span>${tax.toLocaleString()}</span>
+                  <span>₱{tax.toLocaleString()}</span>
                 </div>
                 <div className="h-px bg-white/10" aria-hidden />
                 <div className="flex items-center justify-between text-base font-semibold text-white">
                   <span>Total</span>
-                  <span>${total.toLocaleString()}</span>
+                  <span>₱{total.toLocaleString()}</span>
                 </div>
               </div>
               <button

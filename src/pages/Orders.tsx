@@ -49,7 +49,7 @@ const statusOptions: OrderStatus[] = [
   "cancelled",
 ];
 
-const formatCurrency = (value: number) => `$${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+const formatCurrency = (value: number) => `₱${value.toLocaleString("en-PH", { minimumFractionDigits: 2 })}`;
 const formatDate = (value: string | undefined) =>
   value ? new Date(value).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "TBD";
 const formatDateTime = (value: string) =>

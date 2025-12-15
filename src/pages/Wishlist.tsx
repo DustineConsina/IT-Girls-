@@ -105,10 +105,10 @@ const Wishlist: FC = () => {
                     <p className="text-sm text-purple-100/80 line-clamp-2">{product.description}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-2xl font-semibold text-white">${product.price.toLocaleString()}</p>
+                    <p className="text-2xl font-semibold text-white">₱{product.price.toLocaleString()}</p>
                     {product.originalPrice && (
                       <span className="text-sm text-purple-200/80 line-through">
-                        ${product.originalPrice.toLocaleString()}
+                        ₱{product.originalPrice.toLocaleString()}
                       </span>
                     )}
                   </div>

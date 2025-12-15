@@ -232,7 +232,7 @@ const Shop: FC = () => {
                       <p className="text-sm font-semibold text-white">{product.name}</p>
                       <p className="text-xs text-indigo-100">{categoryLabels[product.category] ?? product.category}</p>
                     </div>
-                    <span className="text-sm font-semibold text-white">${product.price.toLocaleString()}</span>
+                    <span className="text-sm font-semibold text-white">₱{product.price.toLocaleString()}</span>
                   </div>
                 </button>
               ))}
@@ -367,10 +367,10 @@ const Shop: FC = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <p className="text-2xl font-semibold text-white">${product.price.toLocaleString()}</p>
+                      <p className="text-2xl font-semibold text-white">₱{product.price.toLocaleString()}</p>
                       {product.originalPrice && (
                         <span className="text-sm text-purple-200 line-through">
-                          ${product.originalPrice.toLocaleString()}
+                          ₱{product.originalPrice.toLocaleString()}
                         </span>
                       )}
                     </div>
