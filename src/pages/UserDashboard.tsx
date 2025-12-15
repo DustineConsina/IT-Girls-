@@ -46,7 +46,7 @@ const UserDashboard: FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartIds, favorites, addToCart: addCartItem, toggleFavorite: toggleFavoriteId } = useCart();
-  const productsCatalog = useMemo(() => generateProductCatalog(60), []);
+  const productsCatalog = useMemo(() => generateProductCatalog(), []);
   const {
     activeProductId,
     bannerProduct,

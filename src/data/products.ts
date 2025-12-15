@@ -14,20 +14,7 @@ export interface Product {
   tags?: string[];
 }
 
-const variantLabels = [
-  "Prime",
-  "Series 2",
-  "Series 3",
-  "Series 4",
-  "Series 5",
-  "Series 6",
-  "Series 7",
-  "Series 8",
-  "Series 9",
-  "Series 10",
-];
-
-export const baseProducts: Product[] = [
+export const productsCatalog: Product[] = [
   {
     id: 1,
     name: "Vertex Pro 15",
@@ -175,60 +162,151 @@ export const baseProducts: Product[] = [
     isTrending: true,
     tags: ["projector", "4k", "portable"],
   },
+  {
+    id: 11,
+    name: "Nimbus Studio Monitors",
+    price: 598,
+    originalPrice: 649,
+    image: "https://images.unsplash.com/photo-1517059224940-d4af9eec41e5?auto=format&fit=crop&w=900&q=80",
+    rating: 4.6,
+    reviews: 131,
+    category: "electronics",
+    description:
+      "Dual-driver reference speakers tuned for producers and creators who need accurate playback.",
+    inStock: true,
+    tags: ["audio", "studio", "monitoring"],
+  },
+  {
+    id: 12,
+    name: "Aviator Weekender Duffel",
+    price: 289,
+    originalPrice: 320,
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+    rating: 4.7,
+    reviews: 214,
+    category: "accessories",
+    description:
+      "Vegetable-tanned leather with padded tech sleeve and detachable shoulder strap for travel days.",
+    inStock: true,
+    isTrending: true,
+    tags: ["travel", "leather", "weekender"],
+  },
+  {
+    id: 13,
+    name: "Solstice Smart Floor Lamp",
+    price: 219,
+    originalPrice: 249,
+    image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
+    rating: 4.4,
+    reviews: 98,
+    category: "smart-home",
+    description:
+      "Adaptive color temperature, app presets, and voice assistant support for modern spaces.",
+    inStock: true,
+    tags: ["lighting", "automation", "decor"],
+  },
+  {
+    id: 14,
+    name: "Atlas Performance Hoodie",
+    price: 118,
+    image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=900&q=80",
+    rating: 4.8,
+    reviews: 407,
+    category: "accessories",
+    description:
+      "Moisture-wicking technical fleece with hidden media pocket and scuba hood.",
+    inStock: true,
+    tags: ["apparel", "athleisure"],
+  },
+  {
+    id: 15,
+    name: "Orbit Active Earbuds",
+    price: 179,
+    originalPrice: 199,
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
+    rating: 4.3,
+    reviews: 264,
+    category: "electronics",
+    description:
+      "Secure-fit wireless earbuds with adaptive EQ and IPX5 sweat resistance.",
+    inStock: true,
+    isNew: true,
+    tags: ["audio", "wireless", "fitness"],
+  },
+  {
+    id: 16,
+    name: "Circuit Commuter Bike",
+    price: 1290,
+    originalPrice: 1490,
+    image: "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
+    rating: 4.5,
+    reviews: 74,
+    category: "accessories",
+    description:
+      "Lightweight aluminum frame with belt drive and integrated lights for city riding.",
+    inStock: true,
+    tags: ["mobility", "cycling", "urban"],
+  },
+  {
+    id: 17,
+    name: "Horizon Studio Desk",
+    price: 840,
+    originalPrice: 920,
+    image: "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?auto=format&fit=crop&w=900&q=80",
+    rating: 4.9,
+    reviews: 112,
+    category: "smart-home",
+    description:
+      "Solid oak sit-stand desk with cable passthroughs and wireless charging pad.",
+    inStock: true,
+    isTrending: true,
+    tags: ["workspace", "furniture", "desk"],
+  },
+  {
+    id: 18,
+    name: "Pulseform Training Shoes",
+    price: 158,
+    image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=80",
+    rating: 4.6,
+    reviews: 295,
+    category: "footwear",
+    description:
+      "Hybrid trainer with responsive foam midsole and reinforced lateral support.",
+    inStock: true,
+    tags: ["training", "gym", "performance"],
+  },
+  {
+    id: 19,
+    name: "Cascade Pour-Over Set",
+    price: 162,
+    originalPrice: 189,
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
+    rating: 4.7,
+    reviews: 183,
+    category: "smart-home",
+    description:
+      "Hand-blown borosilicate brewer with precision scale and variable-temp kettle.",
+    inStock: true,
+    tags: ["coffee", "kitchen", "artisan"],
+  },
+  {
+    id: 20,
+    name: "Summit Expedition Parka",
+    price: 349,
+    originalPrice: 420,
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+    rating: 4.8,
+    reviews: 152,
+    category: "accessories",
+    description:
+      "Waterproof shell with recycled insulation rated for sub-zero adventures.",
+    inStock: true,
+    isNew: true,
+    tags: ["outerwear", "winter", "performance"],
+  },
 ];
 
-const composeVariant = (product: Product, variantIndex: number, productIndex: number): Product => {
-  const multiplier = variantIndex * baseProducts.length;
-  const variantId = multiplier + product.id;
-  const priceDelta = variantIndex * 12;
-  const updatedPrice = Number((product.price + priceDelta).toFixed(2));
-  const updatedOriginalPrice = product.originalPrice
-    ? Number((product.originalPrice + priceDelta + 10).toFixed(2))
-    : undefined;
+export const generateProductCatalog = (): Product[] => productsCatalog;
 
-  return {
-    ...product,
-    id: variantId,
-    name: `${product.name} ${variantLabels[variantIndex]}`,
-    price: updatedPrice,
-    originalPrice: updatedOriginalPrice,
-    rating: Math.min(5, Number((product.rating - variantIndex * 0.05).toFixed(1))),
-    reviews: Math.max(12, product.reviews - variantIndex * 11),
-    isNew:
-      variantIndex === 0
-        ? product.isNew
-        : variantIndex >= variantLabels.length - 2 || product.isNew,
-    isTrending: variantIndex % 2 === 0 ? product.isTrending : productIndex % 3 === 0,
-    tags: [...(product.tags ?? []), `collection-${variantIndex + 1}`],
-  };
-};
-
-export const generateProductCatalog = (limit = 100): Product[] => {
-  const expanded = variantLabels.flatMap((_, variantIndex) =>
-    baseProducts.map((product, productIndex) => composeVariant(product, variantIndex, productIndex))
-  );
-
-  return expanded.slice(0, limit);
-};
-
-export const getProductById = (id: number): Product | undefined => {
-  if (!Number.isFinite(id) || id < 1) {
-    return undefined;
-  }
-
-  const baseCount = baseProducts.length;
-  const variantIndex = Math.floor((id - 1) / baseCount);
-
-  if (variantIndex < 0 || variantIndex >= variantLabels.length) {
-    return undefined;
-  }
-
-  const baseIndex = (id - 1) % baseCount;
-  const baseProduct = baseProducts[baseIndex];
-
-  if (!baseProduct) {
-    return undefined;
-  }
-
-  return composeVariant(baseProduct, variantIndex, baseIndex);
-};
+export const getProductById = (id: number): Product | undefined =>
+  productsCatalog.find((product) => product.id === id);
