@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
+import Wishlist from "./pages/Wishlist";
+import Settings from "./pages/Settings";
+import Cart from "./pages/Cart";
 import LoadingOverlay from "./components/ui/LoadingOverlay";
 import "admin-lte/dist/css/adminlte.min.css"; 
 import "./index.css";
@@ -67,6 +70,36 @@ const AppContent = () => {
             <ProtectedRoute>
               <Layout>
                 <Shop />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Cart />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Wishlist />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Settings />
               </Layout>
             </ProtectedRoute>
           }

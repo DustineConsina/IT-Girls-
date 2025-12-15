@@ -1,9 +1,10 @@
-import { FC } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 import { Bell, LogOut, Menu, ShoppingBag, ShoppingCart, User } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import Dropdown from "../ui/DropDown"
 import ThemeToggle from "../ui/ThemeToggle"
+import { useCart } from "../../context/CartContext"
 
 interface TopNavProps {
   theme: string
@@ -14,8 +15,29 @@ interface TopNavProps {
 
 const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarOpen }) => {
   const { role, logout } = useAuth()
+  const { cartIds } = useCart()
   const navigate = useNavigate()
   const isAdmin = role === "admin"
+  const cartCount = cartIds.length
+  const [cartPulse, setCartPulse] = useState(false)
+  const previousCountRef = useRef(cartCount)
+
+  useEffect(() => {
+    let timeoutId: number | undefined
+
+    if (cartCount > previousCountRef.current) {
+      setCartPulse(true)
+      timeoutId = window.setTimeout(() => setCartPulse(false), 600)
+    }
+
+    previousCountRef.current = cartCount
+
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId)
+      }
+    }
+  }, [cartCount])
 
   const handleLogout = () => {
     logout()
@@ -55,11 +77,18 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
 
         <div className="ml-auto flex items-center gap-3 sm:gap-4 md:gap-5">
           <Link
-            to="/shop"
-            className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10 lg:inline-flex"
+            to="/cart"
+            className={`hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10 lg:inline-flex ${cartPulse ? "cart-icon-animate" : ""}`}
           >
-            <ShoppingCart size={18} />
-            <span>View cart</span>
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/10">
+              <ShoppingCart size={18} />
+              {cartCount > 0 && (
+                <span className="cart-count-badge absolute -top-1 -right-1 min-w-[1.4rem] rounded-full bg-emerald-500 px-1 text-xs font-semibold leading-5 text-white">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </span>
+            <span>Cart</span>
           </Link>
           <ThemeToggle theme={theme} setTheme={setTheme} />
 

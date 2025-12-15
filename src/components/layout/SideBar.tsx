@@ -5,10 +5,10 @@ import {
   SettingsIcon,
   BarChart3,
   ShoppingCart,
+  ShoppingBag,
   Users,
   Package,
   TrendingUp,
-  ClipboardList,
   X,
   ChevronLeft,
   ChevronRight,
@@ -49,12 +49,6 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen, isCollapsed, setIsCollap
       icon: <BarChart3 size={20} />
     },
     {
-      path: "/orders",
-      label: "Orders",
-      description: "Track fulfillment pipelines",
-      icon: <ClipboardList size={20} />
-    },
-    {
       path: "/products",
       label: "Products",
       description: "Manage listings & stock",
@@ -88,10 +82,10 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen, isCollapsed, setIsCollap
       icon: <ShoppingCart size={20} />
     },
     {
-      path: "/orders",
-      label: "My Orders",
-      description: "Delivery timelines & invoices",
-      icon: <ClipboardList size={20} />
+      path: "/cart",
+      label: "Cart",
+      description: "Items ready for checkout",
+      icon: <ShoppingBag size={20} />
     },
     {
       path: "/wishlist",

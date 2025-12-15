@@ -1,19 +1,7 @@
 import { FC } from "react";
 import { Star, Heart, ShoppingCart } from "lucide-react";
 import Modal from "./ui/Modal";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  rating: number;
-  reviews: number;
-  category: string;
-  description?: string;
-  inStock: boolean;
-}
+import type { Product } from "../data/products";
 
 interface ProductDetailsModalProps {
   product: Product | null;

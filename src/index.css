@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cart-cta-animate {
+	animation: cart-cta-bounce 0.6s ease;
+}
+
+@keyframes cart-cta-bounce {
+	0% {
+		transform: scale(1);
+	}
+
+	35% {
+		transform: scale(0.95);
+	}
+
+	70% {
+		transform: scale(1.08);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.cart-banner {
+	animation: cart-banner-enter 0.35s ease forwards;
+}
+
+@keyframes cart-banner-enter {
+	0% {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.cart-icon-animate {
+	animation: cart-icon-pop 0.6s ease;
+}
+
+@keyframes cart-icon-pop {
+	0% {
+		transform: scale(1);
+	}
+
+	40% {
+		transform: scale(1.12);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.cart-count-badge {
+	animation: cart-badge-enter 0.3s ease;
+}
+
+@keyframes cart-badge-enter {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
