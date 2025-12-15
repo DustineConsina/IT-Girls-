@@ -3,7 +3,7 @@ import { Bell, Lock, Moon, Save, Shield, User } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 const Settings: FC = () => {
-  const { role, logout } = useAuth();
+  const { role, userName, userEmail, logout } = useAuth();
   const [emailUpdates, setEmailUpdates] = useState(true);
   const [smsUpdates, setSmsUpdates] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -57,7 +57,7 @@ const Settings: FC = () => {
                 <span className="text-purple-100/80">Display name</span>
                 <input
                   type="text"
-                  defaultValue={role === "admin" ? "Merchant Admin" : "Marketplace Shopper"}
+                  defaultValue={userName ?? (role === "admin" ? "Admin" : "Shopper")}
                   className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 focus:border-white/40 focus:outline-none"
                 />
               </label>
@@ -65,7 +65,7 @@ const Settings: FC = () => {
                 <span className="text-purple-100/80">Email address</span>
                 <input
                   type="email"
-                  defaultValue={role === "admin" ? "merchant@example.com" : "shopper@example.com"}
+                  defaultValue={userEmail ?? ""}
                   className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 focus:border-white/40 focus:outline-none"
                 />
               </label>

@@ -15,13 +15,34 @@ export default function Register() {
   const [userRole, setUserRole] = useState<"user" | "admin">("user");
   const navigate = useNavigate();
 
+  const deriveDisplayName = (inputEmail: string) => {
+    if (!inputEmail) {
+      return "Shopper";
+    }
+
+    const localPart = inputEmail.split("@")[0] || inputEmail;
+    const tokens = localPart
+      .split(/[._\-\s]+/)
+      .map((token) => token.trim())
+      .filter(Boolean);
+
+    if (!tokens.length) {
+      return localPart;
+    }
+
+    return tokens
+      .map((token) => token.charAt(0).toUpperCase() + token.slice(1).toLowerCase())
+      .join(" ");
+  };
+
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    login(userRole);
+    const displayName = deriveDisplayName(email);
+    login({ role: userRole, name: displayName, email });
     navigate("/");
   };
 

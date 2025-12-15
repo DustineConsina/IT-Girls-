@@ -14,10 +14,11 @@ interface TopNavProps {
 }
 
 const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarOpen }) => {
-  const { role, logout } = useAuth()
+  const { role, userName, logout } = useAuth()
   const { cartIds } = useCart()
   const navigate = useNavigate()
   const isAdmin = role === "admin"
+  const resolvedName = userName ?? (isAdmin ? "Admin" : "Shopper")
   const cartCount = cartIds.length
   const [cartPulse, setCartPulse] = useState(false)
   const previousCountRef = useRef(cartCount)
@@ -53,10 +54,10 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
           </div>
           <div className="hidden space-y-1 leading-tight sm:block">
             <span className="text-xs font-semibold uppercase tracking-[0.32em] text-indigo-200/80">
-              Marketplace HQ
+              Syntax Sisters
             </span>
             <span className="block text-lg font-semibold text-white">
-              Welcome back, {isAdmin ? "Admin" : "Shopper"}
+              Welcome back, {resolvedName}
             </span>
           </div>
         </Link>
@@ -67,10 +68,7 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
               Home
             </Link>
             <Link to="/shop" className="transition hover:text-white">
-              Catalog
-            </Link>
-            <Link to="/register" className="transition hover:text-white">
-              Membership
+              Shop
             </Link>
           </nav>
         </div>
@@ -118,7 +116,7 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
                 </div>
                 <div className="hidden text-left leading-tight md:block">
                   <span className="block text-xs uppercase tracking-wide text-white/50">Account</span>
-                  <span className="text-sm font-semibold text-white">{isAdmin ? "Admin" : "Shopper"} workspace</span>
+                  <span className="text-sm font-semibold text-white">{resolvedName} workspace</span>
                 </div>
               </div>
             }
