@@ -233,77 +233,7 @@ export const productsCatalog: Product[] = [
     isNew: true,
     tags: ["audio", "wireless", "fitness"],
   },
-  {
-    id: 16,
-    name: "Circuit Commuter Bike",
-    price: 1290,
-    originalPrice: 1490,
-    image: "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
-    rating: 4.5,
-    reviews: 74,
-    category: "accessories",
-    description:
-      "Lightweight aluminum frame with belt drive and integrated lights for city riding.",
-    inStock: true,
-    tags: ["mobility", "cycling", "urban"],
-  },
-  {
-    id: 17,
-    name: "Horizon Studio Desk",
-    price: 840,
-    originalPrice: 920,
-    image: "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?auto=format&fit=crop&w=900&q=80",
-    rating: 4.9,
-    reviews: 112,
-    category: "smart-home",
-    description:
-      "Solid oak sit-stand desk with cable passthroughs and wireless charging pad.",
-    inStock: true,
-    isTrending: true,
-    tags: ["workspace", "furniture", "desk"],
-  },
-  {
-    id: 18,
-    name: "Pulseform Training Shoes",
-    price: 158,
-    image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=80",
-    rating: 4.6,
-    reviews: 295,
-    category: "footwear",
-    description:
-      "Hybrid trainer with responsive foam midsole and reinforced lateral support.",
-    inStock: true,
-    tags: ["training", "gym", "performance"],
-  },
-  {
-    id: 19,
-    name: "Cascade Pour-Over Set",
-    price: 162,
-    originalPrice: 189,
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
-    rating: 4.7,
-    reviews: 183,
-    category: "smart-home",
-    description:
-      "Hand-blown borosilicate brewer with precision scale and variable-temp kettle.",
-    inStock: true,
-    tags: ["coffee", "kitchen", "artisan"],
-  },
-  {
-    id: 20,
-    name: "Summit Expedition Parka",
-    price: 349,
-    originalPrice: 420,
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
-    rating: 4.8,
-    reviews: 152,
-    category: "accessories",
-    description:
-      "Waterproof shell with recycled insulation rated for sub-zero adventures.",
-    inStock: true,
-    isNew: true,
-    tags: ["outerwear", "winter", "performance"],
-  },
+  
 ];
 
 export const generateProductCatalog = (): Product[] => productsCatalog;
