@@ -60,7 +60,7 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
           <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden />
         </div>
       }
-      className="bg-slate-900/95 text-white border-white/10"
+      className="w-64 bg-slate-900/95 text-white border-white/10"
     >
       <div className="space-y-2 px-4 py-3 border-b border-white/10">
         <p className="text-sm font-semibold">Marketplace updates</p>
@@ -72,42 +72,19 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
     </Dropdown>
   )
 
-  const renderAccountDropdown = () => (
-    <Dropdown
-      buttonContent={
-        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white transition hover:border-white/30 hover:bg-white/10">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-200">
-            <User size={18} />
-          </div>
-          <div className="hidden text-left leading-tight md:block">
-            <span className="block text-xs uppercase tracking-wide text-white/50">Account</span>
-            <span className="text-sm font-semibold text-white">{resolvedName} workspace</span>
-          </div>
-        </div>
-      }
-      className="bg-slate-900/95 text-white border-white/10"
+  const renderAccountButton = () => (
+    <button
+      onClick={handleLogout}
+      className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white transition hover:border-white/30 hover:bg-white/10"
     >
-      <ul className="text-sm">
-        <li>
-          <Link
-            to="/account"
-            className="flex items-start justify-between gap-4 px-4 py-3 transition hover:bg-white/5"
-          >
-            <span className="font-medium text-white">Profile &amp; settings</span>
-            <span className="text-xs uppercase tracking-wide text-white/40">Manage</span>
-          </Link>
-        </li>
-        <li>
-          <button
-            onClick={handleLogout}
-            className="flex w-full items-center gap-2 px-4 py-3 text-left font-medium text-rose-400 transition hover:bg-white/5"
-          >
-            <LogOut size={16} />
-            <span>Sign out</span>
-          </button>
-        </li>
-      </ul>
-    </Dropdown>
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-200">
+        <User size={16} />
+      </span>
+      <span className="hidden text-left leading-tight md:block">
+        <span className="block text-[10px] uppercase tracking-wide text-white/50">Sign out</span>
+        <span className="text-sm text-white">{resolvedName}</span>
+      </span>
+    </button>
   )
 
   if (isAdmin) {
@@ -150,7 +127,7 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
             </Link>
             <ThemeToggle theme={theme} setTheme={setTheme} />
             {renderNotificationDropdown()}
-            {renderAccountDropdown()}
+            {renderAccountButton()}
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
@@ -209,7 +186,7 @@ const TopNav: FC<TopNavProps> = ({ theme, setTheme, isSidebarOpen, setIsSidebarO
           </Link>
           <ThemeToggle theme={theme} setTheme={setTheme} />
           {renderNotificationDropdown()}
-          {renderAccountDropdown()}
+          {renderAccountButton()}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"

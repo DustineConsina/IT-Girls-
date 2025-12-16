@@ -88,7 +88,7 @@ const Cart: FC = () => {
               to="/shop"
               className="mt-6 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 px-5 py-3 text-sm font-semibold text-white transition hover:from-indigo-600 hover:to-purple-600"
             >
-              Browse the catalog
+              Browse the shop
             </Link>
           </div>
         ) : (
@@ -155,7 +155,7 @@ const Cart: FC = () => {
             <aside className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
               <div className="space-y-2">
                 <h2 className="text-2xl font-semibold">Order summary</h2>
-                <p className="text-sm text-purple-100/80">{itemCount} item{itemCount === 1 ? "" : "s"} in bag</p>
+                <p className="text-sm text-purple-100/80">{itemCount} item{itemCount === 1 ? "" : "s"} in Cart</p>
               </div>
               <div className="space-y-3 text-sm text-purple-100">
                 <div className="flex items-center justify-between">

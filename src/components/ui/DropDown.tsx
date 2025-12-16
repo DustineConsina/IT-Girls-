@@ -4,9 +4,10 @@ interface DropdownProps {
   buttonContent: ReactNode;
   children: ReactNode;
   className?: string;
+  contentClassName?: string;
 }
 
-const Dropdown: FC<DropdownProps> = ({ buttonContent, children, className = "" }) => {
+const Dropdown: FC<DropdownProps> = ({ buttonContent, children, className = "", contentClassName = "py-2" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -27,8 +28,8 @@ const Dropdown: FC<DropdownProps> = ({ buttonContent, children, className = "" }
       </button>
 
       {isOpen && (
-        <div className={`absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-md border border-gray-200 z-50 ${className}`}>
-          <div className="py-2">{children}</div>
+        <div className={`absolute right-0 mt-2 min-w-0 w-fit bg-white rounded-lg shadow-md border border-gray-200 z-50 ${className}`}>
+          <div className={contentClassName}>{children}</div>
         </div>
       )}
     </div>

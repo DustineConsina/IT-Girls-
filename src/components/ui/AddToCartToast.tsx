@@ -18,9 +18,9 @@ const AddToCartToast: FC<AddToCartToastProps> = ({ product, onDismiss }) => {
         <Sparkles size={16} />
       </div>
       <div className="flex-1 space-y-0.5">
-        <p className="text-xs uppercase tracking-wide text-indigo-100/80">Added to bag</p>
+        <p className="text-xs uppercase tracking-wide text-indigo-100/80">Added to cart</p>
         <p className="text-sm font-semibold text-white line-clamp-1">{product.name}</p>
-        <p className="text-xs text-indigo-100/70">${product.price.toLocaleString()}</p>
+        <p className="text-xs text-indigo-100/70">₱{product.price.toLocaleString()}</p>
       </div>
       <button
         type="button"
